@@ -28,8 +28,8 @@ Backend for Tokyo
   [] Windows
   
         $ cd Tokyo_Backend
-        $ python __init__.py
+        $ python server
   [] Linux
   
         $ cd Tokyo_Backend
-        $ python3 __init__.py
+        $ python3 server
