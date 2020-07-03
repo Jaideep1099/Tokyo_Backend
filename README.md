@@ -24,9 +24,9 @@ Backend for Tokyo
 
 #Running Server
 
-  []Windows
-        $cd Tokyo_Backend
-        $python __init__.py
-  []Linux
-        $cd Tokyo_Backend
-        $python3 __init__.py
+  [] Windows
+        $ cd Tokyo_Backend
+        $ python __init__.py
+  [] Linux
+        $ cd Tokyo_Backend
+        $ python3 __init__.py
