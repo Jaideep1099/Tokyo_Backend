@@ -2,9 +2,9 @@
 Backend for Tokyo
 
 #Requirements
-  [-] Python3
-  [-] Flask
-  [-] MongoDB
+  [] Python3
+  [] Flask
+  [] MongoDB
 
 #Setup
 
