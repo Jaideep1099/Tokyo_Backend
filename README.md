@@ -22,7 +22,7 @@ Backend for Tokyo
   
       Install mongoDB Community edition following this tutorial https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials
 
-#Running Server
+[] Running Server
 
   [] Windows
         $ cd Tokyo_Backend
