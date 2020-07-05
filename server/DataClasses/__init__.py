@@ -24,7 +24,4 @@ class Student:
             "Gender" : self.Gender,
             "BGroup" : self.BGroup,
             "Mob" : self.Mob,
-            "Pwd" : self.Pwd,
-            "Appointments" : self.Appointments,
-            "MedRecord" : self.MedRecod
         }

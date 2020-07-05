@@ -1,4 +1,5 @@
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 from .DataClasses import*
 from .Utils import *
@@ -69,6 +70,25 @@ def signUP():
             return jsonify({"status":"done"})            
     except:
         return jsonify({"ERROR":"DATABASE_CONNECTION_ERROR"})
+
+@app.route('/profile',methods=['POST'])
+def getProfile():
+
+    token = request.headers['Authorization']
+    print(token)
+    print(type(token))
+    cur = mongo.db.OnlineList.find_one({"_id":ObjectId(token)})
+    if cur==None:
+        return jsonify({"ERROR":"USER_NOT_LOGGED_IN"})
+    else:
+        data = mongo.db.StudentList.find_one({"RollNo":cur['RollNo']})
+        s = Student(
+            Name=data['Name'],
+            RollNo=data['RollNo'],
+            Gender=data["Gender"],
+            BGroup=data['BGroup'],
+            Mob=data['Mob'])
+        return jsonify(s._dict())
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port='8000')
