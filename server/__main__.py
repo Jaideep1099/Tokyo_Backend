@@ -27,15 +27,11 @@ def signIN():
     if(request.is_json):
         details=request.get_json()
         un=details['uname']
-        pwd=details['passwd']
-        
-        #print(f"uname={un} pwd={pwd}")
-
-        pwd = hashPwd(pwd)
+        pwd= hashPwd(details['passwd'])
 
         dat = mongo.db.StudentList.find_one({"RollNo":un})
         if dat==None:
-            return jsonify({"token":"Invalid User"})
+            return jsonify({"ERROR":"INVALID_USER"})
         else:
             cur = mongo.db.OnlineList.find_one({"RollNo": dat['RollNo']})
             if cur==None:
