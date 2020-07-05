@@ -19,7 +19,7 @@ def test():
         return jsonify({'result':'success'})
     else:
         print("Not json")
-        return jsonify({"result":"Invalid data: Not json"})
+        return jsonify({"ERROR":"NOT_JSON"})
 
 @app.route('/signin',methods=['POST'])
 def signIN():
@@ -46,7 +46,7 @@ def signIN():
                 return jsonify({"ERROR":"USER_ALREADY_LOGGED_IN"})
     else:
         print("Received data is not json")
-        return jsonify({"token":"Invalid Input:Not JSON"})
+        return jsonify({"ERROR":"NOT_JSON"})
 
 
 @app.route('/signup',methods=['POST'])
@@ -63,12 +63,12 @@ def signUP():
     try:
         cur = list(mongo.db.StudentList.find({"RollNo":stud.RollNo}))
         if len(cur)!=0:
-            return jsonify({"ERROR":"USER ALREADY EXISTS"})
+            return jsonify({"ERROR":"USER_ALREADY_EXISTS"})
         else:
             cur = mongo.db.StudentList.insert_one(stud._dict())
             return jsonify({"status":"done"})            
     except:
-        return jsonify({"ERROR":"DATABASE CONNECTION ERROR"})
+        return jsonify({"ERROR":"DATABASE_CONNECTION_ERROR"})
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port='8000')
