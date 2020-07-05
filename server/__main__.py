@@ -39,10 +39,13 @@ def signIN():
         else:
             cur = mongo.db.OnlineList.find_one({"RollNo": dat['RollNo']})
             if cur==None:
-                cur = mongo.db.OnlineList.insert_one({"RollNo":dat['RollNo']})
-                cur = mongo.db.OnlineList.find_one({"RollNo":dat['RollNo']})
-                token = str(cur["_id"])
-                return jsonify({"token":token})
+                if pwd == dat['Pwd']:
+                    cur = mongo.db.OnlineList.insert_one({"RollNo":dat['RollNo']})
+                    cur = mongo.db.OnlineList.find_one({"RollNo":dat['RollNo']})
+                    token = str(cur["_id"])
+                    return jsonify({"token":token})
+                else:
+                    return jsonify({"ERROR":"INCORRECT_PASSWORD"})
             else:
                 return jsonify({"ERROR":"USER_ALREADY_LOGGED_IN"})
     else:
@@ -71,12 +74,44 @@ def signUP():
     except:
         return jsonify({"ERROR":"DATABASE_CONNECTION_ERROR"})
 
+@app.route('/logout',methods=['POST'])
+def logOut():
+
+    token = request.headers['Authorization']
+    cur = mongo.db.OnlineList.find_one({"_id":ObjectId(token)})
+    if cur==None:
+        return jsonify({"ERROR":"USER_NOT_LOGGED_IN"})
+    else:
+        cur = mongo.db.OnlineList.remove({"_id":ObjectId(token)})
+        return jsonify({"status":"done"})
+
+@app.route('/changepwd',methods=['POST'])
+def changePwd():
+
+    token = request.headers['Authorization']
+    cur = mongo.db.OnlineList.find_one({"_id":ObjectId(token)})
+    if cur==None:
+        return jsonify({"ERROR":"USER_NOT_LOGGED_IN"})
+    else:
+        data = request.get_json()
+        cPwd = hashPwd(data['cPwd'])
+        nPwd = hashPwd(data['nPwd'])
+        rollno = cur['RollNo']
+
+        user = mongo.db.StudentList.find_one({"RollNo":rollno})
+
+        if(cPwd != user['Pwd']):
+            return jsonify({"ERROR":"INCORRECT_PASSWORD"})
+        else:
+            user['Pwd'] = nPwd
+            cur = mongo.db.StudentList.update_one({'RollNo':rollno},{"$set":user})
+            return jsonify({"status":"done"})
+
+
 @app.route('/profile',methods=['POST'])
 def getProfile():
 
     token = request.headers['Authorization']
-    print(token)
-    print(type(token))
     cur = mongo.db.OnlineList.find_one({"_id":ObjectId(token)})
     if cur==None:
         return jsonify({"ERROR":"USER_NOT_LOGGED_IN"})
