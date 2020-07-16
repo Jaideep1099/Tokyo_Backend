@@ -65,7 +65,7 @@ def signUP():
         if len(cur)!=0:
             return jsonify({"ERROR":"USER_ALREADY_EXISTS"})
         else:
-            cur = mongo.db.StudentList.insert_one(stud._dict())
+            cur = mongo.db.StudentList.insert_one(stud._signupdict())
             return jsonify({"status":"done"})            
     except:
         return jsonify({"ERROR":"DATABASE_CONNECTION_ERROR"})

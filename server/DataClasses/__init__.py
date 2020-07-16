@@ -25,3 +25,15 @@ class Student:
             "BGroup" : self.BGroup,
             "Mob" : self.Mob,
         }
+
+    def _signupdict(self):
+        return {
+            "Name" : self.Name,
+            "RollNo" : self.RollNo,
+            "Gender" : self.Gender,
+            "BGroup" : self.BGroup,
+            "Mob" : self.Mob,
+            "Pwd" : self.Pwd,
+            "Appointments" : self.Appointments,
+            "MedRecord" : self.MedRecod
+        }
