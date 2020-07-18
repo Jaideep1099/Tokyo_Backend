@@ -5,6 +5,7 @@ class Student:
         RollNo = "rollno",
         Gender = "gender",
         BGroup = "bgroup",
+        Address = "address",
         Mob = "mob",
         Pwd = "pwd"
     ):
@@ -12,18 +13,20 @@ class Student:
         self.RollNo = RollNo
         self.Gender = Gender
         self.BGroup = BGroup
+        self.Address = Address
         self.Mob = Mob
         self.Pwd = Pwd
         self.Appointments = []
         self.MedRecod = []
 
-    def _dict(self):
+    def _profiledict(self):
         return {
             "Name" : self.Name,
             "RollNo" : self.RollNo,
             "Gender" : self.Gender,
             "BGroup" : self.BGroup,
             "Mob" : self.Mob,
+            "Address" : self.Address
         }
 
     def _signupdict(self):
@@ -32,6 +35,7 @@ class Student:
             "RollNo" : self.RollNo,
             "Gender" : self.Gender,
             "BGroup" : self.BGroup,
+            "Address" : self.Address,
             "Mob" : self.Mob,
             "Pwd" : self.Pwd,
             "Appointments" : self.Appointments,

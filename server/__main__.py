@@ -57,6 +57,7 @@ def signUP():
         RollNo = details['uname'],
         Gender = details['gnd'],
         BGroup = details['bgroup'],
+        Address = details['address'],
         Mob = details['mob'],
         Pwd = hashPwd(details['passwd'])
     )
@@ -78,7 +79,7 @@ def logOut():
     if cur==None:
         return jsonify({"ERROR":"USER_NOT_LOGGED_IN"})
     else:
-        cur = mongo.db.OnlineList.remove({"_id":ObjectId(token)})
+        cur = mongo.db.OnlineList.delete_one({"_id":ObjectId(token)})
         return jsonify({"status":"done"})
 
 @app.route('/changepwd',methods=['POST'])
@@ -118,8 +119,9 @@ def getProfile():
             RollNo=data['RollNo'],
             Gender=data["Gender"],
             BGroup=data['BGroup'],
+            Address=data['Address'],
             Mob=data['Mob'])
-        return jsonify(s._dict())
+        return jsonify(s._profiledict())
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0',port='8000')
+    app.run(host='0.0.0.0',port='8000',debug=True)
