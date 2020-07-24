@@ -5,7 +5,6 @@ class Student:
         RollNo = "rollno",
         Gender = "gender",
         BGroup = "bgroup",
-        Address = "address",
         Mob = "mob",
         Pwd = "pwd"
     ):
@@ -13,9 +12,9 @@ class Student:
         self.RollNo = RollNo
         self.Gender = Gender
         self.BGroup = BGroup
-        self.Address = Address
         self.Mob = Mob
         self.Pwd = Pwd
+        self.Address = ""
         self.Appointments = []
         self.MedRecod = []
 

@@ -57,7 +57,6 @@ def signUP():
         RollNo = details['uname'],
         Gender = details['gnd'],
         BGroup = details['bgroup'],
-        Address = details['address'],
         Mob = details['mob'],
         Pwd = hashPwd(details['passwd'])
     )
